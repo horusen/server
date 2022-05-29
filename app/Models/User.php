@@ -33,6 +33,7 @@ class User extends Authenticatable
 {
     use ApiRequestConsumer, HasApiTokens, MustVerifyEmail, Notifiable;
     protected $table = 'users';
+    protected $with = ['etat'];
 
     protected $dates = [
         'email_verified_at'
@@ -46,11 +47,13 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'etat',
         'email_verified_at',
         'password',
         'inscription',
         'remember_token'
     ];
+
 
     public function setPasswordAttribute($value)
     {
@@ -65,5 +68,10 @@ class User extends Authenticatable
     public function inscription()
     {
         return $this->belongsTo(User::class, 'inscription');
+    }
+
+    public function etat()
+    {
+        return $this->belongsTo(EtatUser::class, 'etat');
     }
 }

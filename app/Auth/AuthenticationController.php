@@ -31,7 +31,7 @@ class AuthenticationController extends Controller
     public function register(int $id, Request $request)
     {
         $request->validate(['name' => 'required', 'email' => 'required|exists:users,email', 'password' => 'required|confirmed']);
-        $user =  $this->userService->update($id, $request->all());
+        $user =  $this->userService->update($id, $request->all() + ['etat' => 2]);
         $user->markEmailAsVerified();
         return $this->login($request);
     }
@@ -46,7 +46,7 @@ class AuthenticationController extends Controller
 
     public function logout()
     {
-        Auth::user()->tokens()->delete();
+        Auth::logout();
         return null;
     }
 

@@ -10,9 +10,9 @@ class EnregistrementService extends BaseService
 
     private MutuelleDeSanteService $mutuelleService;
 
-    public function __construct($model, MutuelleDeSanteService $mutuelleService)
+    public function __construct($model, $with, MutuelleDeSanteService $mutuelleService)
     {
-        parent::__construct($model);
+        parent::__construct($model, $with);
         $this->mutuelleService = $mutuelleService;
     }
 

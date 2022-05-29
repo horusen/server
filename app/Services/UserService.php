@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Shared\ApiRequest\ApiRequest;
 use App\Shared\Services\BaseService;
 use Exception;
 use Illuminate\Http\Request;
@@ -34,16 +35,47 @@ class UserService extends BaseService
         return $this->model::find($inscription->id);
     }
 
+    public function list(ApiRequest $request = null)
+    {
+        return $this->model::with($this->with)->where('id', '!=', 1)->latest()->consume($request);
+    }
 
-    public function edit(Request $request, int $id)
+    public function update(int $id, array $data)
+    {
+        $user = $this->model::find($id);
+
+        if (!isset($user)) throw new Exception("Utisateur inexistant");
+
+        // Check if emai has not been already taken
+        $u = $this->model::where('id', '!=', $id)->where('email', $data['email'])->first();
+        if (isset($u)) throw new Exception("L'email a été deja pris.", 422);
+
+        $user->update($data);
+        return $this->show($id);
+    }
+
+    public function accountEdit($id, array $data)
     {
 
+        // Check if emai has not been already taken
+        $u = $this->model::where('id', '!=', $id)->where('email', $data['email'])->first();
+        if (isset($u)) throw new Exception("L'email a été deja pris.", 422);
 
-        $inscription = User::findOrFail($id);
+        $user = $this->model::find($id);
 
-        $inscription->update($request->all());
+        if (!isset($user)) throw new Exception("Utisateur inexistant");
 
+        if (password_verify($data['password'], $user->password)) {
+            $user->name = $data['name'];
+            $user->email = $data['email'];
 
-        return $inscription;
+            if ($data['new_password']) $user->password = $data['new_password'];
+
+            $user->save();
+
+            return $user;
+        }
+
+        throw new Exception("Mot de passe erroné");
     }
 }

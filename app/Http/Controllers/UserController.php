@@ -27,4 +27,22 @@ class UserController extends BaseController
         $request->validate($this->validation);
         return $this->service->add($request);
     }
+
+    public function update(int $id, Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email'
+        ]);
+        return $this->service->update($id, $request->all());
+    }
+
+    public function accountEdit($id, $request)
+    {
+        $request->validate([
+            'name' => 'required', 'password' => 'required', 'new_password' => 'confirmed|min:6'
+        ]);
+
+        return $this->userService->accountEdit($id, $request);
+    }
 }

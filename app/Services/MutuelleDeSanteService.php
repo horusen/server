@@ -12,13 +12,10 @@ class MutuelleDeSanteService extends BaseService
 
     public function __construct(MutuelleDeSante $model)
     {
-        parent::__construct($model);
+        parent::__construct($model, ['commune.departement.region', 'type']);
     }
 
-    public function list(ApiRequest $request = null)
-    {
-        return $this->model::with(['commune.departement.region', 'type'])->consume($request);
-    }
+
 
     public function getByCommuneAndByType($commune, $type)
     {

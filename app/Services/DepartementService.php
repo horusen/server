@@ -12,13 +12,12 @@ class DepartementService extends BaseService
 
     public function __construct(Departement $model)
     {
-        parent::__construct($model);
+        parent::__construct($model, ['region']);
     }
 
-    public function list(ApiRequest $request = null)
-    {
-        return $this->model::with(['region'])->consume($request);
-    }
+
+
+
 
     public function getByRegion($region)
     {

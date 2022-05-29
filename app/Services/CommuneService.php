@@ -12,12 +12,9 @@ class CommuneService extends BaseService
 
     public function __construct(Commune $model)
     {
-        parent::__construct($model);
+        parent::__construct($model, ['departement']);
     }
-    public function list(ApiRequest $request = null)
-    {
-        return $this->model::with(['departement'])->consume($request);
-    }
+
 
     public function getByDepartement($departement)
     {

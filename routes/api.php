@@ -7,6 +7,7 @@ use App\Http\Controllers\EnregistrementBeneficiaireController;
 use App\Http\Controllers\EnregistrementCoutController;
 use App\Http\Controllers\EnregistrementPrestationController;
 use App\Http\Controllers\MutuelleDeSanteController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('auth/login', [AuthenticationController::class, 'login']);
+Route::post('auth/logout', [AuthenticationController::class, 'logout']);
 Route::post('auth/register/{id}', [AuthenticationController::class, 'register']);
 Route::get('register/check', 'App\Auth\VerificationController@check')->name('register.check');
 Route::get('register/update', 'App\Auth\VerificationController@update')->name('register.update');
@@ -29,6 +31,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('email/verify', 'App\Auth\VerificationController@verify')->name('email.verify');
     Route::get('user/{user}/email/resend', 'App\Auth\VerificationController@resend')->name('email.resend');
+
+    Route::post('users/{user}/account-edit', [UserController::class, 'accountEdit']);
 
 
     Route::apiResource('users', 'App\Http\Controllers\UserController');

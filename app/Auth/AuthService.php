@@ -15,6 +15,8 @@ class AuthService
 
         if (password_verify($data['password'], $user->password)) {
 
+            if ($user->etat == 3) throw new Exception("Votre accés à la plateforme a été bloqué.");
+
             $token = $user->createToken('authToken');
 
 

@@ -9,36 +9,38 @@ use Illuminate\Support\Facades\Auth;
 abstract class BaseService
 {
     protected Model $model;
+    protected array $with;
 
-    public function __construct(Model $model)
+    public function __construct(Model $model, array $with = [])
     {
         $this->model = $model;
+        $this->with = $with;
     }
 
 
     public function list(ApiRequest $request = null)
     {
-        return $this->model::consume($request);
+        return $this->model::with($this->with)->latest()->consume($request);
     }
 
 
     public function show(int $id)
     {
-        return $this->model::findOrFail($id);
+        return $this->model::with($this->with)->findOrFail($id);
     }
 
 
     public function store(array $data)
     {
         $element = $this->model::create($data + ['inscription' => Auth::id()]);
-        return $this->model::find($element->id);
+        return $this->show($element->id);
     }
 
     public function update(int $id, array $data)
     {
         $element = $this->model::find($id);
         $element->update($data);
-        return $element->refresh();
+        return $this->show($id);
     }
 
 

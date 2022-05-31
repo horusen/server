@@ -32,7 +32,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use ApiRequestConsumer, HasApiTokens, MustVerifyEmail, Notifiable;
-    protected $table = 'users';
+    protected $table = 'inscriptions';
     protected $with = ['etat'];
 
     protected $dates = [

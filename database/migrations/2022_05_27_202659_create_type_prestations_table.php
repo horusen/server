@@ -16,7 +16,7 @@ class CreateTypePrestationsTable extends Migration
         Schema::create('type_prestations', function (Blueprint $table) {
             $table->id();
             $table->string('libelle');
-            $table->foreignId('inscription')->constrained('inscriptions')->onUpdate('restrict')->onDelete('restrict');
+            $table->foreignId('inscription')->constrained('inscriptions')->onUpdate('restrict')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -16,8 +16,8 @@ class CreateCommunesTable extends Migration
         Schema::create('communes', function (Blueprint $table) {
             $table->id();
             $table->string('libelle');
-            $table->foreignId('departement')->constrained('departements')->onUpdate('restrict')->onDelete('restrict');
-            $table->foreignId('inscription')->constrained('inscriptions')->onUpdate('restrict')->onDelete('restrict');
+            $table->foreignId('departement')->constrained('departements')->onUpdate('restrict')->onDelete('cascade');
+            $table->foreignId('inscription')->constrained('inscriptions')->onUpdate('restrict')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -27,6 +27,7 @@ class CreateEtatUsersTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints('users_etat_foreign');
         Schema::dropIfExists('etat_users');
     }
 }

@@ -15,7 +15,7 @@ class CreateEnregistrementBeneficiairesTable extends Migration
     {
         Schema::create('enregistrement_beneficiaires', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mutuelle')->constrained('mutuelles')->onUpdate('restrict')->onDelete('restrict');
+            $table->foreignId('mutuelle')->constrained('mutuelle_de_santes')->onUpdate('restrict')->onDelete('restrict');
             $table->date('date')->nullable();
             $table->string('nombre_adherent')->nullable();
             $table->string('nombre_beneficiaire')->nullable();

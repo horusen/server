@@ -15,13 +15,13 @@ class CreateEnregistrementBeneficiairesTable extends Migration
     {
         Schema::create('enregistrement_beneficiaires', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mutuelle')->constrained('mutuelles')->onUpdate('restrict')->onDelete('cascade');
+            $table->foreignId('mutuelle')->constrained('mutuelles')->onUpdate('restrict')->onDelete('restrict');
             $table->date('date')->nullable();
             $table->string('nombre_adherent')->nullable();
             $table->string('nombre_beneficiaire')->nullable();
             $table->string('nombre_beneficiaire_a_jour')->nullable();
             $table->string('dette_etat')->nullable();
-            $table->foreignId('inscription')->constrained('inscriptions')->onUpdate('restrict')->onDelete('cascade');
+            $table->foreignId('inscription')->constrained('inscriptions')->onUpdate('restrict')->onDelete('restrict');
             $table->timestamps();
         });
     }

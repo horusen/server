@@ -15,8 +15,8 @@ class CreateEnregistrementPrestationsTable extends Migration
     {
         Schema::create('enregistrement_prestations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mutuelle')->constrained('mutuelle_de_santes')->onUpdate('restrict')->onDelete('cascade');
-            $table->foreignId('type_prestation')->constrained('type_prestations')->onUpdate('restrict')->onDelete('cascade')->nullabe();
+            $table->foreignId('mutuelle')->constrained('mutuelle_de_santes')->onUpdate('restrict')->onDelete('restrict');
+            $table->foreignId('type_prestation')->constrained('type_prestations')->onUpdate('restrict')->onDelete('restrict')->nullabe();
             $table->date('date')->nullable();
             $table->integer('cas_classique_nombre_h')->nullable();
             $table->integer('cas_classique_nombre_f')->nullable();
@@ -28,7 +28,7 @@ class CreateEnregistrementPrestationsTable extends Migration
             $table->integer('cas_eleve_nombre_f')->nullable();
             $table->integer('cas_ndongo_daara_nombre_h')->nullable();
             $table->integer('cas_ndongo_daara_nombre_f')->nullable();
-            $table->foreignId('inscription')->constrained('inscriptions')->onUpdate('restrict')->onDelete('cascade');
+            $table->foreignId('inscription')->constrained('inscriptions')->onUpdate('restrict')->onDelete('restrict');
             $table->timestamps();
         });
     }

@@ -16,9 +16,9 @@ class CreateMutuelleDeSantesTable extends Migration
         Schema::create('mutuelle_de_santes', function (Blueprint $table) {
             $table->id();
             $table->string('libelle');
-            $table->foreignId('type')->constrained('type_de_mutuelles')->onUpdate('restrict')->onDelete('cascade');
-            $table->foreignId('commune')->constrained('communes')->onUpdate('restrict')->onDelete('cascade');
-            $table->foreignId('inscription')->constrained('inscriptions')->onUpdate('restrict')->onDelete('cascade');
+            $table->foreignId('type')->constrained('type_de_mutuelles')->onUpdate('restrict')->onDelete('restrict');
+            $table->foreignId('commune')->constrained('communes')->onUpdate('restrict')->onDelete('restrict');
+            $table->foreignId('inscription')->constrained('inscriptions')->onUpdate('restrict')->onDelete('restrict');
             $table->timestamps();
         });
     }

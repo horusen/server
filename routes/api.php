@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('hello-word', function () {
+    return 'hello';
+});
 Route::post('auth/login', [AuthenticationController::class, 'login']);
 Route::post('auth/logout', [AuthenticationController::class, 'logout']);
 Route::post('auth/register/{id}', [AuthenticationController::class, 'register']);

@@ -16,8 +16,8 @@ class CreateDepartementsTable extends Migration
         Schema::create('departements', function (Blueprint $table) {
             $table->id();
             $table->string('libelle');
-            $table->foreignId('region')->constrained('regions')->onUpdate('restrict')->onDelete('cascade');
-            $table->foreignId('inscription')->constrained('inscriptions')->onUpdate('restrict')->onDelete('cascade');
+            $table->foreignId('region')->constrained('regions')->onUpdate('restrict')->onDelete('restrict');
+            $table->foreignId('inscription')->constrained('inscriptions')->onUpdate('restrict')->onDelete('restrict');
             $table->timestamps();
         });
     }

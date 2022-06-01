@@ -19,8 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->foreignId('etat')->default(1)->constrained('etat_users')->onUpdate('restrict')->onDelete('cascade');
-            $table->foreignId('inscription')->nullable()->constrained('inscriptions')->onUpdate('restrict')->onDelete('cascade');
+            $table->foreignId('etat')->default(1)->constrained('etat_users')->onUpdate('restrict')->onDelete('restrict');
+            $table->foreignId('inscription')->nullable()->constrained('inscriptions')->onUpdate('restrict')->onDelete('restrict');
             $table->rememberToken();
             $table->timestamps();
         });

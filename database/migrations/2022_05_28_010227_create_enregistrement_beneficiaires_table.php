@@ -21,7 +21,7 @@ class CreateEnregistrementBeneficiairesTable extends Migration
             $table->string('nombre_beneficiaire')->nullable();
             $table->string('nombre_beneficiaire_a_jour')->nullable();
             $table->string('dette_etat')->nullable();
-            $table->foreignId('inscription')->constrained('inscriptions')->onUpdate('restrict')->onDelete('cascade');
+            $table->foreignId('inscription')->constrained('inscriptions')->onUpdate('restrict')->onDelete('restrict');
             $table->timestamps();
         });
     }
